@@ -1,84 +1,20 @@
-// import { observer, useLocalObservable } from 'mobx-react-lite'
-// import { useEffect, useState } from 'react'
-// import Guess from '../components/Guess'
-// import Querty from '../components/Qwerty'
-// import PuzzleStore from '../stores/PuzzleStore'
-// import Modal from '../components/Modal'
-// import { FaRegQuestionCircle } from 'react-icons/fa'
-
-// export default observer(function Home() {
-//   const store = useLocalObservable(() => PuzzleStore)
-//   const [isModalOpen, setIsModalOpen] = useState(true)
-//   const [isDarkMode, setIsDarkMode] = useState(false)
-//   const [showWordModal, setShowWordModal] = useState(false)
-//   const [showStatsModal, setShowStatsModal] = useState(false)
-//   const [stats, setStats] = useState({
-//     gamesPlayed: 0,
-//     wins: 0,
-//     losses: 0,
-//   })
-  
-
-//   useEffect(() => {
-//     store.init()
-//     window.addEventListener('keyup', store.handleKeyup)
-
-//     return () => {
-//       window.removeEventListener('keyup', store.handleKeyup)
-//     }
-//   }, [])
-
-//   const toggleTheme = () => {
-//     setIsDarkMode((prevMode) => !prevMode)
-//   }
-
-//   return (
-//     <div className={`flex flex-col items-center justify-center w-screen h-screen transition delay-200 ${isDarkMode ? 'bg-[#262B3C]' : 'bg-[#F9F9F9]'}`}>
-//       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
-//       <div className={`flex items-center justify-between mb-8
-//           rounded-lg py-5 px-5 w-1/3 transition delay-200 ${isDarkMode ? 'bg-[#DADCE008]' : 'bg-[#f3f3f3]'}`}>
-//         <FaRegQuestionCircle className={`w-6 h-6 transition delay-200 ${isDarkMode ? 'text-white' : 'text-black'}`} onClick={() => setIsModalOpen(true)} />
-//         <h1 className="text-4xl font-bold text-transparent uppercase bg-gradient-to-br from-blue-400 to-green-400 bg-clip-text">
-//           Wordle
-//         </h1>
-//         <button onClick={toggleTheme} className={`px-5 py-1 rounded-lg text-md transition delay-200 ${isDarkMode ? 'bg-black text-white' : 'bg-[#f3f3f3] border border-black'}`}>
-//           {isDarkMode ? 'Light' : 'Dark'}
-//         </button>
-//       </div>
-      
-//       {store.guesses.map((_, i) => (
-//         <Guess
-//           key={i}
-//           word={store.word}
-//           guess={store.guesses[i]}
-//           isGuessed={i < store.currentGuess}
-//           isDarkMode={isDarkMode}
-//         />
-//       ))}
-//       {store.won && <h1>You won!</h1>}
-//       {store.lost && <h1>You lost!</h1>}
-//       {(store.won || store.lost) && (
-//         <button onClick={store.init}>Play Again</button>
-//       )}
-      
-//       <div className="rounded-md bg-[#DADCE04D]/50 p-4 mt-5">
-//         <Querty store={store} />
-//       </div>
-//     </div>
-//   )
-// })
 import { observer, useLocalObservable } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import Guess from '../components/Guess'
-import Querty from '../components/Qwerty'
+import Qwerty from '../components/Qwerty'
 import PuzzleStore from '../stores/PuzzleStore'
 import Modal from '../components/Modal'
 import StatModal from '../components/StatModal'
 import ExpiryModal from '../components/ExpiryModal'
-import ResultModal from '../components/ResultModal' // New component
+import ResultModal from '../components/ResultModal'
 import { FaRegQuestionCircle } from 'react-icons/fa'
 import { IoStatsChartOutline } from "react-icons/io5";
+
+interface Stats {
+  gamesPlayed: number
+  wins: number
+  losses: number
+}
 
 export default observer(function Home() {
   const store = useLocalObservable(() => PuzzleStore)
@@ -86,8 +22,8 @@ export default observer(function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showWordModal, setShowWordModal] = useState(false)
   const [showStatsModal, setShowStatsModal] = useState(false)
-  const [showResultModal, setShowResultModal] = useState(false) // New state for result modal
-  const [stats, setStats] = useState({
+  const [showResultModal, setShowResultModal] = useState(false)
+  const [stats, setStats] = useState<Stats>({
     gamesPlayed: 0,
     wins: 0,
     losses: 0,
@@ -115,7 +51,7 @@ export default observer(function Home() {
         }
         setStats(newStats)
         localStorage.setItem('wordleStats', JSON.stringify(newStats))
-        setShowResultModal(true) // Show result modal instead of stats modal
+        setShowResultModal(true)
         setGameEnded(true)
       }
     }
@@ -172,7 +108,7 @@ export default observer(function Home() {
   }
 
   // Convert remaining time to minutes:seconds format
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`
@@ -256,7 +192,7 @@ export default observer(function Home() {
       </div>
       
       <div className="rounded-md bg-[#DADCE04D]/50 p-4 mt-5">
-        <Querty store={store} />
+        <Qwerty store={store} />
       </div>
     </div>
   )
