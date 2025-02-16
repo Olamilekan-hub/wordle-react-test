@@ -148,7 +148,7 @@ export default observer(function Home() {
       />
 
       <div className={`flex items-center justify-between mb-8
-          rounded-lg py-5 px-5 w-1/3 transition delay-200 ${isDarkMode ? 'bg-[#DADCE008]' : 'bg-[#f3f3f3]'}`}>
+          rounded-lg py-5 px-5 w-[90%] md:w-1/3 transition delay-200 ${isDarkMode ? 'bg-[#DADCE008]' : 'bg-[#f3f3f3]'}`}>
         <FaRegQuestionCircle className={`cursor-pointer w-6 h-6 transition delay-200 ${isDarkMode ? 'text-white' : 'text-black'}`} onClick={() => setIsModalOpen(true)} />
         <h1 className="text-4xl font-bold text-transparent uppercase bg-gradient-to-br from-blue-400 to-green-400 bg-clip-text">
           Wordle
