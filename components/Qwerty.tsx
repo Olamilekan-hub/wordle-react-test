@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react-lite'
-import { IObservableObject } from 'mobx'
 
 interface QwertyProps {
-  store: IObservableObject & {
+  store: {
     exactGuesses: string[]
     inexactGuesses: string[]
     allGuesses: string
