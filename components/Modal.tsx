@@ -11,14 +11,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, isDarkMode }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-      <div className={`w-1/3 p-6 overflow-auto rounded-lg shadow-lg max-h-[90%] border ${
+      <div className={`w-[90%] md:w-1/3 p-6 overflow-auto rounded-lg shadow-lg max-h-[90%] border ${
         isDarkMode 
           ? 'bg-[#262B3C] text-white border-gray-700' 
           : 'bg-white text-black border-black'
       }`}>
         <h2 className="mb-6 text-3xl font-bold text-center">How to Play</h2>
         <p className="mb-2 text-lg font-regular">Guess the hidden word in 5 attempts.</p>
-        <p className="mb-2 text-lg font-regular">Each attempts must be a valid 5-letter.</p>
+        <p className="mb-2 text-lg font-regular">Each attempt must be a valid 5-letter.</p>
         <p className="mb-2 text-lg font-regular">After each attempt the color of the letter changes to show how close you are to guessing the word.</p>
         <p className="mb-2 text-lg font-bold">Example</p>
         <div className='p-5'>

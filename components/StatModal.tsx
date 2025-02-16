@@ -27,7 +27,7 @@ const StatModal: React.FC<ModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-      <div className={`w-1/3 p-6 overflow-auto rounded-lg shadow-lg max-h-[90%] border ${
+      <div className={`w-[90%] md:w-1/3 p-6 overflow-auto rounded-lg shadow-lg max-h-[90%] border ${
         isDarkMode 
           ? 'bg-[#262B3C] text-white border-gray-700' 
           : 'bg-white text-black border-black'
